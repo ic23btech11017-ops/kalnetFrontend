@@ -66,8 +66,28 @@
             border-left: 3px solid #1f96ad !important;
             padding-left: 0.625rem !important;
         }
+        
+        .sidebar-sublink-active:hover {
+            background-color: rgba(31, 150, 173, 0.15) !important;
+        }
 
         #mobile-sidebar { transition: transform 0.3s ease-in-out; }
+        
+        /* Ensure nav buttons maintain consistency */
+        .sidebar-sublink {
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: left;
+            border: none;
+            background: transparent;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .sidebar-sublink:not(.sidebar-sublink-active) {
+            border-left: 3px solid transparent;
+            padding-left: 0.75rem;
+        }
         
         /* Professional styling improvements */
         button { transition: all 0.2s ease; }
@@ -454,7 +474,7 @@
         </div>
 
         <nav class="flex-1 overflow-y-auto custom-scrollbar py-4 px-3 space-y-1">
-            <button onclick="navigateTo('dashboard')" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors">
+            <button id="nav-dashboard" onclick="navigateTo('dashboard')" class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors">
                 <span class="material-symbols-outlined text-[20px]">dashboard</span>
                 Dashboard
             </button>
@@ -6110,10 +6130,10 @@
             navigate(routeName) {
                 const screenId = this.routes.get(routeName) || routeName;
                 window.location.hash = `#${routeName}`;
-                this.render(screenId);
+                this.render(screenId, routeName);
             },
             
-            render(screenId) {
+            render(screenId, routeName) {
                 // Hide all sections
                 document.querySelectorAll('.view-section').forEach(section => {
                     section.classList.remove('active');
@@ -6125,15 +6145,47 @@
                     targetSection.classList.add('active');
                     this.currentRoute = screenId;
                     
-                    // Update sidebar active states
-                    document.querySelectorAll('.sidebar-sublink, .sidebar-link').forEach(link => {
-                        link.classList.remove('sidebar-sublink-active', 'bg-primary/10');
+                    // Clear all sidebar active states
+                    document.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('sidebar-sublink-active');
+                        if (btn.classList.contains('sidebar-sublink') || btn.id?.startsWith('nav-')) {
+                            btn.classList.remove('bg-primary/10');
+                            btn.classList.remove('text-primary');
+                            btn.classList.add('text-slate-500', 'hover:text-primary');
+                        }
                     });
                     
                     // Mark appropriate sidebar item as active
                     const navItem = document.getElementById(`nav-${screenId}`);
                     if (navItem) {
                         navItem.classList.add('sidebar-sublink-active');
+                        navItem.classList.add('bg-primary/10', 'text-primary');
+                        navItem.classList.remove('text-slate-500');
+                    }
+                    
+                    // Also mark the main category button if applicable
+                    const mainNavItem = document.getElementById('nav-inventory-main');
+                    if (mainNavItem && (screenId === 'overview' || screenId === 'stock-tracker' || screenId === 'ledger' || 
+                        screenId === 'reservations' || screenId === 'discrepancies' || screenId === 'adjustments' || 
+                        screenId === 'transfers' || screenId === 'receiving' || screenId === 'picking' || 
+                        screenId === 'cycle-counts' || screenId === 'items' || screenId === 'putaway-rules')) {
+                        mainNavItem.classList.add('bg-primary/10', 'text-primary');
+                        mainNavItem.classList.remove('text-slate-600');
+                    } else if (mainNavItem) {
+                        mainNavItem.classList.remove('bg-primary/10', 'text-primary');
+                        mainNavItem.classList.add('text-slate-600');
+                    }
+                    
+                    // Mark dashboard button if on dashboard/overview
+                    const dashboardBtn = document.getElementById('nav-dashboard');
+                    if (dashboardBtn) {
+                        if (screenId === 'overview') {
+                            dashboardBtn.classList.add('bg-primary/10', 'text-primary');
+                            dashboardBtn.classList.remove('text-slate-600');
+                        } else {
+                            dashboardBtn.classList.remove('bg-primary/10', 'text-primary');
+                            dashboardBtn.classList.add('text-slate-600');
+                        }
                     }
                     
                     // Close mobile sidebar
@@ -6152,7 +6204,7 @@
                 window.addEventListener('hashchange', () => {
                     const hash = window.location.hash.slice(1) || 'dashboard';
                     const screenId = this.routes.get(hash) || hash;
-                    this.render(screenId);
+                    this.render(screenId, hash);
                 });
                 
                 // Initialize with current hash or dashboard
@@ -6165,7 +6217,7 @@
         router.register('dashboard', 'overview');
         router.register('overview', 'overview');
         router.register('stock-tracker', 'stock-tracker');
-        router.register('items', 'stock-tracker');
+        router.register('items', 'items');
         router.register('ledger', 'ledger');
         router.register('reservations', 'reservations');
         router.register('discrepancies', 'discrepancies');
@@ -6177,10 +6229,45 @@
         router.register('warehouses', 'warehouses');
         router.register('update-stock', 'update-stock');
         router.register('reorder-automation', 'reorder-automation');
+        router.register('exceptions', 'exceptions');
+        router.register('putaway-rules', 'putaway-rules');
         
         // Legacy navigateTo function (maintains backward compatibility)
         function navigateTo(screenId) {
-            router.navigate(screenId);
+            // Prevent double navigation
+            if (router.currentRoute === screenId) {
+                return;
+            }
+            
+            // Map common route names to screen IDs
+            const routeMap = {
+                'dashboard': 'overview',
+                'overview': 'overview',
+                'stock-tracker': 'stock-tracker',
+                'items': 'items',
+                'ledger': 'ledger',
+                'reservations': 'reservations',
+                'discrepancies': 'discrepancies',
+                'adjustments': 'adjustments',
+                'transfers': 'transfers',
+                'receiving': 'receiving',
+                'picking': 'picking',
+                'cycle-counts': 'cycle-counts',
+                'warehouses': 'warehouses',
+                'update-stock': 'update-stock',
+                'reorder-automation': 'reorder-automation',
+                'exceptions': 'exceptions',
+                'putaway-rules': 'putaway-rules',
+                'sku-detail': 'sku-detail'
+            };
+            
+            const actualScreenId = routeMap[screenId] || screenId;
+            
+            // Update URL hash
+            window.location.hash = `#${screenId}`;
+            
+            // Render the screen
+            router.render(actualScreenId, screenId);
         }
 
 
