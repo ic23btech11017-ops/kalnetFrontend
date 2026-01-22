@@ -41,6 +41,10 @@
             animation: fadeIn 0.2s ease-in-out;
         }
         .view-section.active { display: flex; }
+        
+        /* Routing Styles */
+        [data-route] { cursor: pointer; }
+        [data-route]:hover { text-decoration: underline; opacity: 0.8; }
 
         @keyframes fadeIn {
             from { opacity: 0.95; transform: translateY(5px); }
@@ -53,6 +57,7 @@
         
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .icon-filled { font-variation-settings: 'FILL' 1; }
+        
         /* Active states for sidebar links */
         .sidebar-sublink-active {
             background-color: rgba(31, 150, 173, 0.1) !important;
@@ -63,79 +68,150 @@
         }
 
         #mobile-sidebar { transition: transform 0.3s ease-in-out; }
+        
+        /* Professional styling improvements */
+        button { transition: all 0.2s ease; }
+        button:active { transform: scale(0.98); }
+        
+        /* Focus states for accessibility */
+        button:focus, input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(31, 150, 173, 0.1);
+        }
+        
+        /* Improved table styling */
+        table tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.15s ease;
+        }
+        
+        /* Professional shadow for cards */
+        .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Professional UI polish */
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.01em;
+        }
+        
+        .font-bold {
+            font-weight: 600;
+        }
+        
+        /* Improved button styling */
+        button.bg-primary {
+            background: linear-gradient(135deg, #1f96ad 0%, #167a8c 100%);
+            box-shadow: 0 2px 4px rgba(31, 150, 173, 0.2);
+        }
+        
+        button.bg-primary:hover {
+            background: linear-gradient(135deg, #167a8c 0%, #0f5a6b 100%);
+            box-shadow: 0 4px 8px rgba(31, 150, 173, 0.3);
+        }
+        
+        /* Improved border radius for consistency */
+        input, select, textarea, button {
+            border-radius: 0.5rem;
+        }
+        
+        /* Table header styling */
+        thead {
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Badge styling improvements */
+        [class*="bg-"] {
+            transition: all 0.2s ease;
+        }
+        
+        /* Improved breadcrumb styling */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            gap: 0.5rem;
+        }
                 /* ===== DARK MODE STYLES ===== */
         .dark body {
-            background-color: #0f172a;
-            color: #e2e8f0;
+            background-color: #0d1117;
+            color: #e3e6eb;
         }
 
         /* Dark mode - Sidebar */
         .dark aside {
-            background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
-            border-right-color: rgba(255,255,255,0.05);
+            background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+            border-right-color: rgba(255,255,255,0.08);
         }
 
         /* Dark mode - Header */
         .dark header {
-            background-color: #1e293b;
-            border-bottom-color: #334155;
+            background-color: #161b22;
+            border-bottom-color: #30363d;
         }
 
         /* Dark mode - Main content areas */
         .dark .bg-white {
-            background-color: #1e293b;
+            background-color: #161b22;
         }
         
         .dark .bg-slate-50 {
-            background-color: #0f172a;
+            background-color: #0d1117;
         }
         
         .dark .bg-slate-100 {
-            background-color: #1e293b;
+            background-color: #161b22;
         }
 
         /* Dark mode - Text colors */
         .dark .text-slate-900 {
-            color: #f1f5f9;
+            color: #e3e6eb;
         }
         
         .dark .text-slate-800 {
-            color: #e2e8f0;
+            color: #d1d9e0;
         }
         
         .dark .text-slate-700 {
-            color: #cbd5e1;
+            color: #a8b4bf;
         }
         
         .dark .text-slate-600 {
-            color: #94a3b8;
+            color: #8b949e;
         }
         
         .dark .text-slate-500 {
-            color: #64748b;
+            color: #6e7681;
         }
 
         /* Dark mode - Borders */
         .dark .border-slate-200 {
-            border-color: #334155;
+            border-color: #30363d;
         }
         
         .dark .border-slate-300 {
-            border-color: #475569;
+            border-color: #444c56;
         }
 
         .dark .divide-slate-100 > * {
-            border-color: #334155;
+            border-color: #30363d;
         }
 
         /* Dark mode - Buttons */
         .dark button.bg-white {
-            background-color: #1e293b;
-            border-color: #334155;
+            background-color: #161b22;
+            border-color: #30363d;
+            color: #c9d1d9;
         }
 
         .dark button.bg-white:hover {
-            background-color: #334155;
+            background-color: #21262d;
+            border-color: #444c56;
         }
 
         /* Dark mode - Input fields */
@@ -145,31 +221,32 @@
         .dark input[type="email"],
         .dark select,
         .dark textarea {
-            background-color: #1e293b;
-            border-color: #334155;
-            color: #e2e8f0;
+            background-color: #0d1117;
+            border-color: #30363d;
+            color: #c9d1d9;
         }
 
         .dark input::placeholder {
-            color: #64748b;
+            color: #6e7681;
         }
 
         /* Dark mode - Tables */
         .dark table thead {
-            background-color: #0f172a;
+            background-color: #0d1117;
+            color: #8b949e;
         }
 
         .dark table tbody tr:hover {
-            background-color: #1e293b;
+            background-color: #161b22;
         }
 
         /* Dark mode - Cards & Panels */
         .dark .shadow-sm {
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
         }
 
         .dark .shadow-md {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
         }
 
         /* Dark mode - Status badges keep their colors */
@@ -179,43 +256,44 @@
         .dark .bg-orange-50,
         .dark .bg-yellow-50,
         .dark .bg-purple-50 {
-            opacity: 0.9;
+            opacity: 0.95;
         }
-                /* Dark mode - Colored table rows */
+        
+        /* Dark mode - Colored table rows */
         .dark .bg-yellow-50 {
-            background-color: rgba(234, 179, 8, 0.15) !important;
+            background-color: rgba(234, 179, 8, 0.18) !important;
         }
 
         .dark .bg-orange-50 {
-            background-color: rgba(249, 115, 22, 0.15) !important;
+            background-color: rgba(249, 115, 22, 0.18) !important;
         }
 
         .dark .bg-blue-50 {
-            background-color: rgba(59, 130, 246, 0.15) !important;
+            background-color: rgba(59, 130, 246, 0.18) !important;
         }
 
         .dark .bg-red-50 {
-            background-color: rgba(239, 68, 68, 0.15) !important;
+            background-color: rgba(239, 68, 68, 0.18) !important;
         }
 
         .dark .bg-pink-50 {
-            background-color: rgba(236, 72, 153, 0.15) !important;
+            background-color: rgba(236, 72, 153, 0.18) !important;
         }
 
         .dark .bg-green-50 {
-            background-color: rgba(34, 197, 94, 0.15) !important;
+            background-color: rgba(34, 197, 94, 0.18) !important;
         }
 
         .dark .bg-purple-50 {
-            background-color: rgba(168, 85, 247, 0.15) !important;
+            background-color: rgba(168, 85, 247, 0.18) !important;
         }
 
         .dark .bg-emerald-50 {
-            background-color: rgba(16, 185, 129, 0.15) !important;
+            background-color: rgba(16, 185, 129, 0.18) !important;
         }
 
         .dark .bg-indigo-50 {
-            background-color: rgba(99, 102, 241, 0.15) !important;
+            background-color: rgba(99, 102, 241, 0.18) !important;
         }
 
         /* Dark mode - Fix for alternating row colors in tables */
@@ -225,7 +303,7 @@
         .dark tbody tr.bg-red-50:hover,
         .dark tbody tr.bg-pink-50:hover,
         .dark tbody tr.bg-green-50:hover {
-            filter: brightness(1.2);
+            filter: brightness(1.15);
         }
 
         /* Dark mode - Opacity rows (like inactive items) */
@@ -235,67 +313,127 @@
 
         /* Dark mode - Fix for colored text in light backgrounds */
         .dark .text-yellow-700 {
-            color: #fbbf24 !important;
+            color: #e3b341 !important;
         }
 
         .dark .text-orange-700 {
-            color: #fb923c !important;
+            color: #f76808 !important;
         }
 
         .dark .text-orange-600 {
-            color: #fb923c !important;
+            color: #f76808 !important;
         }
 
         .dark .text-blue-700 {
-            color: #60a5fa !important;
+            color: #58a6ff !important;
         }
 
         .dark .text-red-700 {
-            color: #f87171 !important;
+            color: #f85149 !important;
         }
 
         .dark .text-red-600 {
-            color: #f87171 !important;
+            color: #f85149 !important;
         }
 
         .dark .text-emerald-700 {
-            color: #34d399 !important;
+            color: #3fb950 !important;
         }
 
         .dark .text-emerald-600 {
-            color: #34d399 !important;
+            color: #3fb950 !important;
         }
 
         .dark .text-purple-700 {
-            color: #c084fc !important;
+            color: #bc8ef9 !important;
         }
 
         .dark .text-slate-400 {
-            color: #94a3b8 !important;
+            color: #8b949e !important;
         }
 
         .dark .text-slate-600 {
-            color: #cbd5e1 !important;
+            color: #8b949e !important;
         }
-
 
         /* Dark mode - Scrollbar */
         .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #475569;
+            background-color: #30363d;
         }
 
         /* Dark mode - Hover states */
         .dark .hover\:bg-slate-50:hover {
-            background-color: #1e293b !important;
+            background-color: #161b22 !important;
         }
 
         .dark .hover\:bg-slate-100:hover {
-            background-color: #334155 !important;
+            background-color: #21262d !important;
         }
 
         /* Dark mode transition */
         body {
             transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Dark mode link colors */
+        .dark a, .dark .text-primary {
+            color: #58a6ff;
+        }
+        
+        .dark a:hover {
+            color: #79c0ff;
+        }
+        
+        /* Dark mode specific button text colors */
+        .dark .text-slate-700,
+        .dark .text-slate-800,
+        .dark .text-slate-900 {
+            color: #c9d1d9;
+        }
+        
+        /* Dark mode badge and label colors */
+        .dark .bg-slate-100,
+        .dark .bg-slate-200 {
+            background-color: #21262d;
+            border-color: #30363d;
+        }
+        
+        /* Professional dark mode header styling */
+        .dark .bg-slate-50 {
+            background-color: #0d1117;
+            border-color: #30363d;
+        }
+        
+        /* Dark mode focus ring */
+        .dark input:focus,
+        .dark select:focus,
+        .dark textarea:focus {
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+        }
+        
+        /* Dark mode professional button styling */
+        .dark button.bg-primary {
+            background: linear-gradient(135deg, #1f96ad 0%, #167a8c 100%);
+            box-shadow: 0 2px 4px rgba(31, 150, 173, 0.3);
+        }
+        
+        .dark button.bg-primary:hover {
+            background: linear-gradient(135deg, #167a8c 0%, #0f5a6b 100%);
+            box-shadow: 0 4px 8px rgba(31, 150, 173, 0.4);
+        }
+        
+        .dark .text-primary {
+            color: #58a6ff;
+        }
+        
+        .dark .bg-primary {
+            background-color: #0d47a1;
+            opacity: 0.9;
+        }
+        
+        .dark .border-primary {
+            border-color: #58a6ff;
         }
 
     </style>
@@ -5960,47 +6098,107 @@
     <!-- JavaScript for Navigation -->
     <script>
         // Navigation system
+        // Advanced Router with Hash Navigation
+        const router = {
+            routes: new Map(),
+            currentRoute: null,
+            
+            register(routeName, screenId) {
+                this.routes.set(routeName, screenId);
+            },
+            
+            navigate(routeName) {
+                const screenId = this.routes.get(routeName) || routeName;
+                window.location.hash = `#${routeName}`;
+                this.render(screenId);
+            },
+            
+            render(screenId) {
+                // Hide all sections
+                document.querySelectorAll('.view-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show selected section
+                const targetSection = document.getElementById(screenId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    this.currentRoute = screenId;
+                    
+                    // Update sidebar active states
+                    document.querySelectorAll('.sidebar-sublink, .sidebar-link').forEach(link => {
+                        link.classList.remove('sidebar-sublink-active', 'bg-primary/10');
+                    });
+                    
+                    // Mark appropriate sidebar item as active
+                    const navItem = document.getElementById(`nav-${screenId}`);
+                    if (navItem) {
+                        navItem.classList.add('sidebar-sublink-active');
+                    }
+                    
+                    // Close mobile sidebar
+                    if (window.innerWidth < 1024) {
+                        toggleSidebar();
+                    }
+                    
+                    window.scrollTo(0, 0);
+                } else {
+                    console.warn(`Route not found: ${screenId}`);
+                }
+            },
+            
+            init() {
+                // Handle hash change
+                window.addEventListener('hashchange', () => {
+                    const hash = window.location.hash.slice(1) || 'dashboard';
+                    const screenId = this.routes.get(hash) || hash;
+                    this.render(screenId);
+                });
+                
+                // Initialize with current hash or dashboard
+                const initialHash = window.location.hash.slice(1) || 'dashboard';
+                this.navigate(initialHash);
+            }
+        };
+        
+        // Register all routes
+        router.register('dashboard', 'overview');
+        router.register('overview', 'overview');
+        router.register('stock-tracker', 'stock-tracker');
+        router.register('items', 'stock-tracker');
+        router.register('ledger', 'ledger');
+        router.register('reservations', 'reservations');
+        router.register('discrepancies', 'discrepancies');
+        router.register('adjustments', 'adjustments');
+        router.register('transfers', 'transfers');
+        router.register('receiving', 'receiving');
+        router.register('picking', 'picking');
+        router.register('cycle-counts', 'cycle-counts');
+        router.register('warehouses', 'warehouses');
+        router.register('update-stock', 'update-stock');
+        router.register('reorder-automation', 'reorder-automation');
+        
+        // Legacy navigateTo function (maintains backward compatibility)
         function navigateTo(screenId) {
-    // Hide all sections
-    document.querySelectorAll('.view-section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Show selected section
-    const targetSection = document.getElementById(screenId);
-    if (targetSection) {
-        targetSection.classList.add('active');
-        
-        // Remove all active states
-        document.querySelectorAll('.sidebar-sublink').forEach(link => {
-            link.classList.remove('sidebar-sublink-active');
-        });
-        
-        // Add active state to current link
-        const activeLink = document.getElementById(`nav-${screenId}`);
-        if (activeLink) {
-            activeLink.classList.add('sidebar-sublink-active');
+            router.navigate(screenId);
         }
-        
-        // Close mobile sidebar
-        if (window.innerWidth < 1024) {
-            toggleSidebar();
-        }
-        
-        window.scrollTo(0, 0);
-    }
-}
 
 
-        // Initialize - show dashboard by default
+        // Initialize - with router support
         document.addEventListener('DOMContentLoaded', function() {
-            navigateTo('dashboard');
+            initDarkMode();
+            router.init();
         });
 
-        // Sidebar toggle for mobile (optional)
+        // Sidebar toggle for mobile
         function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('collapsed');
+            const sidebar = document.getElementById('mobile-sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            
+            if (sidebar && overlay) {
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+            }
         }
 
         // Sample data update functions (for demo purposes)
